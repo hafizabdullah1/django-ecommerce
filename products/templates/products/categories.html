@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% block title %} {% endblock %} {% block content %}
+
+<div style="
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url(https://engine.com.pk/cdn/shop/files/Men_1_3e26e33d-27d8-406b-92f0-515b28558d19.jpg?v=1719405810)"  className="h-screen bg-cover bg-center bg-fixed flex flex-col gap-5 justify-center items-center">
+    <h1 className="backdrop-blur-lg px-4 py-2 sm:text-4xl text-2xl md:text-7xl bg-center font-bold">
+        <span style="color: white" class="font-extrabold">Clothes</span>
+        <span>&nbsp;{{"Clothes"?.split(" ").slice(1)}}</span>
+    </h1>
+    <p className="text-white font-semibold tracking-widest mb-8">
+        Category: clothes
+    </p>
+    <button onClick="{onclick}"
+        className="cursor-pointer relative group overflow-hidden border-2 px-8 py-2 border-primary">
+        <span className="font-bold text-white text-lg relative z-10 group-hover:text-primary duration-500">
+            Shop Now
+        </span>
+        <span
+            className="absolute top-0 left-0 w-full bg-primary duration-500 group-hover:-translate-x-full h-full"></span>
+        <span
+            className="absolute top-0 left-0 w-full bg-primary duration-500 group-hover:translate-x-full h-full"></span>
+        <span
+            className="absolute top-0 left-0 w-full bg-primary duration-500 delay-300 group-hover:-translate-y-full h-full"></span>
+        <span
+            className="absolute delay-300 top-0 left-0 w-full bg-primary duration-500 group-hover:translate-y-full h-full"></span>
+    </button>
+</div>
+
+{% endblock %}
