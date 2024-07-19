@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %} Admin Dashboard | Create Product {% endblock %}
+
+{% block content %}
+
+<!-- {% if messages %}
+<div
+  class="flex gap-4 max-sm:flex-col items-center justify-center text-center bg-red-600 text-white px-6 py-3.5 rounded font-[sans-serif]">
+  <p class="text-base">
+    {% for message in messages %} {{ message }} {% endfor %}
+  </p>
+</div>
+{% endif %} -->
+
+<div class="font-[sans-serif]">
+  <div class="bg-gradient-to-r from-blue-700 to-blue-300 w-full h-60">
+    <img src="https://readymadeui.com/cardImg.webp" alt="Banner Image" class="w-full h-full object-cover" />
+  </div>
+
+  <div class="-mt-28 mb-6 px-4">
+    <div class="mx-auto max-w-6xl shadow-lg p-8 relative bg-white rounded-md">
+      <h2 class="text-xl text-gray-800 font-bold">Cretae New Product</h2>
+
+      <form method="post" enctype="multipart/form-data" class="mt-8 grid sm:grid-cols-2 gap-6">
+        {% csrf_token %}
+        <div>
+          <label class="text-gray-800 text-sm block mb-2">Title</label>
+          <input type='text' placeholder='Enter product title' name="title"
+            class="w-full rounded-md py-2.5 px-4 border border-gray-300 text-sm outline-[#007bff]" />
+        </div>
+        <div>
+          <label class="text-gray-800 text-sm block mb-2">Category</label>
+          <select name="category" class="w-full rounded-md py-2.5 px-4 border border-gray-300 text-sm outline-[#007bff]">
+            <option value="none">----------</option>
+              {% for category in categories %}
+              <option value="{{ category.id }}">{{ category.name }}</option>
+              {% endfor %}
+          </select>
+      </div>
+        <div>
+          <label class="text-gray-800 text-sm block mb-2">Subcategory</label>
+          <input type='text' placeholder='Enter product subcategory' name="subcategory"
+            class="w-full rounded-md py-2.5 px-4 border border-gray-300 text-sm outline-[#007bff]" />
+        </div>
+        <div>
+          <label class="text-gray-800 text-sm block mb-2">Brand</label>
+          <input type='text' placeholder='Enter product brand' name="brand"
+            class="w-full rounded-md py-2.5 px-4 border border-gray-300 text-sm outline-[#007bff]" />
+        </div>
+        <div>
+          <label class="text-gray-800 text-sm block mb-2">Color</label>
+          <input type='text' placeholder='Enter product color eg.(#5F16B9 or red)' name="colors"
+            class="w-full rounded-md py-2.5 px-4 border border-gray-300 text-sm outline-[#007bff]" />
+        </div>
+        <div>
+          <label class="text-gray-800 text-sm block mb-2">Price</label>
+          <input type='number' placeholder='Enter product price' name="price"
+            class="w-full rounded-md py-2.5 px-4 border border-gray-300 text-sm outline-[#007bff]" />
+        </div>
+        <div>
+          <label class="text-gray-800 text-sm block mb-2">CountInStock</label>
+          <input type='number' placeholder='Enter product stock' name="countInStock"
+            class="w-full rounded-md py-2.5 px-4 border border-gray-300 text-sm outline-[#007bff]" />
+        </div>
+        <div>
+          <label class="text-gray-800 text-sm block mb-2">Image</label>
+          <input type='file' name="image"
+            class="w-full rounded-md py-2.5 px-4 border border-gray-300 text-sm outline-[#007bff]" />
+        </div>
+        <div class="col-span-full">
+          <label class="text-gray-800 text-sm block mb-2">Description</label>
+          <textarea placeholder='Description' rows="6" name="description"
+            class="w-full rounded-md px-4 border border-gray-300 text-sm pt-3 outline-[#007bff]"></textarea>
+        </div>
+
+        <button type='submit'
+          class="text-white font-semibold w-max bg-[#007bff] hover:bg-blue-600 tracking-wide rounded-md text-sm px-6 py-3 mt-4">
+          Add Product
+        </button>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

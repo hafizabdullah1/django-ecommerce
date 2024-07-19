@@ -1,0 +1,16 @@
+Developing ecommerce website Part 1
+Develop 2 interfaces
+1- An admin interface (not the django admin): 
+where only users with admin access can log in and add/update/delete Categories and products
+
+2- User interface:
+Just a regular ecommerce site interface where on first page
+- it shows all the categories (clothes, watches and others)
+- when you click on one of categories, it would show all the products in that
+
+     <========Part 2=========>
+
+eCommerce enhanced
+Now that you guys have created categories, product list and product detail pages, 
+create add-to-cart features using sessions
+

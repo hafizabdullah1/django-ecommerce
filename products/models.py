@@ -12,9 +12,6 @@ class Categorie(models.Model):
         return self.name
 
 
-class Color(models.Model):
-    name = models.CharField(max_length=100)
-
 class Product(models.Model):
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     category = models.ForeignKey(Categorie, on_delete=models.CASCADE)
@@ -30,3 +27,4 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+    
