@@ -41,7 +41,8 @@ INSTALLED_APPS = [
 
 EXTERNAL_APPS = [
     'products',
-    'dashboard'
+    'dashboard',
+    'auth_app'
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS

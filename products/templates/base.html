@@ -35,7 +35,7 @@
 
           {% if request.user.is_superuser %}
           <li class='max-lg:border-b max-lg:py-3 px-3'><a href='{% url "dashboard_products"  %}'
-            class='text-[#333] hover:text-[#5F16B9] text-[15px] block font-semibold'>Admin Dashboard</a></li>
+              class='text-[#333] hover:text-[#5F16B9] text-[15px] block font-semibold'>Admin Dashboard</a></li>
           {% endif %}
         </ul>
       </div>
@@ -51,10 +51,20 @@
             </svg>
             <span class="absolute left-auto -ml-1 top-0 rounded-full bg-red-500 px-1 py-0 text-xs text-white">0</span>
           </span>
-          <button
-            class='px-5 py-2 text-sm rounded-full text-white border-2 border-[#5F16B9] bg-[#5F16B9] hover:bg-[#5F16a1]'>Sign
-            In</button>
+          {% if request.user.is_authenticated %}
 
+          <a href="{% url 'logout' %}">
+            <button
+              class='px-5 py-2 text-sm rounded-full text-white border-2 border-[#5F16B9] bg-[#5F16B9] hover:bg-[#5F16a1]'>Logout
+            </button>
+          </a>
+          {% else %}
+          <a href="{% url 'login' %}">
+            <button
+              class='px-5 py-2 text-sm rounded-full text-white border-2 border-[#5F16B9] bg-[#5F16B9] hover:bg-[#5F16a1]'>Sign
+              In</button>
+          </a>
+          {% endif %}
           <button id="toggleOpen" class='lg:hidden'>
             <svg class="w-7 h-7" fill="#333" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd"
