@@ -1,0 +1,114 @@
+{% extends 'base.html' %} {% block title %} Shopping Cart Page {% endblock %} {% block content %}
+
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-12 mx-auto">
+        <h1 class="text-3xl underline mb-6 uppercase text-[#5F16B9]">Shopping Cart</h1>
+    </div>
+    {% if cart_products %}
+    <div class="cart_main_div">
+        <div class="font-sans max-w-5xl max-md:max-w-xl mx-auto bg-white py-4 mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 text-center">Shopping Cart</h1>
+
+            <div class="grid md:grid-cols-3 gap-8 mt-16">
+                <div class="md:col-span-2 space-y-4">
+                    {% for item in cart_products %}
+                    <div class="grid grid-cols-3 items-start gap-4">
+                        <div class="col-span-2 flex items-start gap-4">
+                            <div class="w-28 h-28 max-sm:w-24 max-sm:h-24 shrink-0 bg-gray-100 p-2 rounded-md">
+                                <img src='{{item.image.url}}' class="w-full h-full object-contain" />
+                            </div>
+
+                            <div class="flex flex-col">
+                                <h3 class="text-base font-bold text-gray-800">{{item.title}}</h3> <br>
+                                <p class="text-xs font-semibold text-gray-500 mt-0.5"><b>Category</b>: <span
+                                        class="lowercase">{{item.category}}</span></p>
+                                <p class="text-xs font-semibold text-gray-500 mt-0.5"><b>Brand</b>: <span
+                                        class="lowercase">{{item.brand}}</span></p>
+                            </div>
+                        </div>
+
+                        <div class="ml-auto">
+                            <button type="button" value="{{ item.id }}"
+                                class="delete-item mt-6 font-semibold text-red-500 text-xs flex items-center gap-1 shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 fill-current inline"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
+                                        data-original="#000000"></path>
+                                    <path
+                                        d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
+                                        data-original="#000000"></path>
+                                </svg>
+                                REMOVE
+                            </button>
+                            <br>
+
+                            <h4 class="text-lg max-sm:text-base font-bold text-gray-800">${{item.price}}.00</h4>
+                        </div>
+                    </div>
+                    <hr class="border-gray-300" />
+                    {% endfor %}
+                </div>
+
+                <div class="bg-gray-100 rounded-md p-4 h-max">
+                    <h3 class="text-lg max-sm:text-base font-bold text-gray-800 border-b border-gray-300 pb-2">Order
+                        Summary</h3>
+
+                    <ul class="text-gray-800 mt-6 space-y-3">
+                        <li class="flex flex-wrap gap-4 text-sm">Subtotal <span class="ml-auto font-bold">$200.00</span>
+                        </li>
+                        <li class="flex flex-wrap gap-4 text-sm">Shipping <span class="ml-auto font-bold">$2.00</span>
+                        </li>
+                        <li class="flex flex-wrap gap-4 text-sm">Tax <span class="ml-auto font-bold">$4.00</span></li>
+                        <hr class="border-gray-300" />
+                        <li class="flex flex-wrap gap-4 text-sm font-bold">Total <span class="ml-auto">$200.00</span>
+                        </li>
+                    </ul>
+
+                    <div class="mt-6 space-y-3">
+                        <button type="button"
+                            class="text-sm px-4 py-2.5 w-full font-semibold tracking-wide bg-gray-800 hover:bg-gray-900 text-white rounded-md mb-3">Checkout</button>
+                        <a href="{% url 'categories' %}">
+                            <button type="button"
+                                class="text-sm px-4 py-2.5 w-full font-semibold tracking-wide bg-transparent text-gray-800 border border-gray-300 rounded-md">Continue
+                                Shopping </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <p class="ml-20 text-red-500 italic">No products in your cart.</p>
+    {% endif %}
+</section>
+
+<script>
+
+    // Delete Item from cart
+$(document).on('click', '.delete-item', function(e) {
+    e.preventDefault();
+
+    const $button = $(this).closest('button');
+    const product_id = $button.val();
+
+    $.ajax({
+        type: 'POST',
+        url: "{% url 'cart_delete' %}",
+        data: {
+            product_id: product_id,
+            csrfmiddlewaretoken: '{{csrf_token}}',
+            action: 'post'
+        },
+        success: (json) => {
+            location.reload();
+        },
+        error: (xhr, errmsg, error) => {
+            console.log({ error });
+        }
+    });
+});
+
+</script>
+
+{% endblock %}

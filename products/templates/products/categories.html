@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block title %} Categories page {% endblock %} {% block content %} 
+{% extends 'base.html' %} {% block title %} Categories page {% endblock %} {% block content %}
 {% if categories %}
 {% for category in categories %}
 
@@ -7,14 +7,14 @@
       url({{category.image.url}});
   " class="h-screen bg-cover bg-center bg-fixed flex flex-col gap-5 justify-center items-center">
     <h1 class="backdrop-blur-lg px-4 py-2 sm:text-4xl text-2xl md:text-7xl bg-center font-bold">
-        <span class="font-extrabold text-[{{ category.color }}] uppercase">{{ category.name|slice:":1" }}</span><span class="text-white">{{ category.name|slice:"1:" }}</span>
+        <span class="font-extrabold text-[{{ category.color }}] uppercase">{{ category.name|slice:":1" }}</span><span
+            class="text-white">{{ category.name|slice:"1:" }}</span>
     </h1>
     <p class="text-white font-semibold tracking-widest mb-8">
         Category: <span class="lowercase">{{category.name}}</span>
     </p>
-    <a href="{% url 'products' category_id=category.id %}">        
-        <button
-            class="cursor-pointer relative group overflow-hidden border-2 px-8 py-2 border-[#5F16B9]">
+    <a href="{% url 'products' category_id=category.id %}">
+        <button class="cursor-pointer relative group overflow-hidden border-2 px-8 py-2 border-[#5F16B9]">
             <span class="font-bold text-white text-lg relative z-10 group-hover:text-[#5F16B9] duration-500">
                 Shop Now
             </span>
@@ -29,6 +29,7 @@
         </button>
     </a>
 </div>
+
 
 {% endfor %}
 {% endif %} {% endblock %}

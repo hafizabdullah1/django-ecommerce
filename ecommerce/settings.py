@@ -42,7 +42,8 @@ INSTALLED_APPS = [
 EXTERNAL_APPS = [
     'products',
     'dashboard',
-    'auth_app'
+    'auth_app',
+    'cart',
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS
@@ -74,11 +75,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart'
             ],
         },
     },
 ]
-
 
 
 MEDIA_URL = '/media/'
